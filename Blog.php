@@ -48,21 +48,21 @@ class Blog extends Controller
     $nrows= Blog_model::check_email($email);
 
     if ($password!=$password_confirmed && empty($username)!=true && empty($email)!=true) {
-        return redirect('register')->withErrors('Passwords não coincidem');
+        return redirect('register')->withErrors('Passwords não coincidem')->withInput();
     }
     elseif (empty($password) && empty($password_confirmed) && empty($username)!=true && empty($email)!=true) {
-        return redirect('register')->withErrors('Password em branco');
+        return redirect('register')->withErrors('Password em branco')->withInput();
     }
     elseif ( empty($password) || empty($password_confirmed) || empty($username) || empty($email)) {
-       return redirect('register')->withErrors('Todos os campos devem ser preenchidos');
+       return redirect('register')->withErrors('Todos os campos devem ser preenchidos')->withInput();
     }
 
     elseif (count($nrows)>0) {
-        return redirect('register')->withErrors('Email já existe na base de dados');
+        return redirect('register')->withErrors('Email já existe na base de dados')->withInput($request->except('email'));
     }
     else{
-        $Message='Success: New user registered';
-        return view('/message_template', $Message);
+        //$Message='Success: New user registered';
+        return view('/message_template');
         }
 
  }

@@ -15,8 +15,7 @@ class Blog_model
         return $insert;
     }
     public static function check_email($email){
-        $emailt="SELECT * FROM users where email='$email'";
-        $queryemail=DB::select($emailt);
+        $queryemail= DB::select("SELECT * FROM users where email='$email'");
         return $queryemail;
     }
     
