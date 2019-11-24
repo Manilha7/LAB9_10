@@ -61,10 +61,11 @@ class Blog extends Controller
         return redirect('register')->withErrors('Email já existe na base de dados')->withInput($request->except('email'));
     }
     else{
-        //$Message='Success: New user registered';
-        return view('/message_template');
+        $register= Blog_model::register_user($username,$email,$password_final);
+        $data = array(
+        'Message' => "Success: New user registered");
+        return view('/message_template',$data);
         }
-
  }
 
 }
