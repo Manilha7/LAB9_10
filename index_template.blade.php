@@ -44,14 +44,14 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="{$href1}">{$MENU_1}</a></li>
+                <li><a href="{{$href1}}">{{$MENU_1}}</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{$href2}">{$MENU_2}</a></li>
-                {if isset($MENU_4)}
-                <li><a href="{$href4}">{$MENU_4}</a></li>{/if}
-                <li><a href="{$href3}">{$MENU_3}</a></li>
+                <li><a href="{{$href2}}">{{$MENU_2}}</a></li>
+                @if (isset($MENU_4))
+                <li><a href="{{$href4}}">{{$MENU_4}}</a></li>@endif
+                <li><a href="{{$href3}}">{{$MENU_3}}</a></li>
             </ul>
         </div>
     </div>
@@ -108,25 +108,25 @@
 <!-- Left-aligned media object -->
 
 <div class="container">
-    {foreach item=base from=$baseLab4}
+    @foreach ($baseLab4 as $base)
     <div class="media">
         <div class="media-left">
             <img src="https://www.w3schools.com/bootstrap/img_avatar3.png" class="media-object" style="width:60px">
         </div>
         <div class="media-body">
-            <h4 class="media-heading">{$base.name} <small><i> Data de modificação: {$base.updated_at}  </i></small></h4>
-            <p> {$base.content}</p>
+            <h4 class="media-heading">{{$base->name}} <small><i> Data de modificação: {{$base->updated_at}} </i></small></h4>
+            <p> {{$base->content}}</p>
             <div class="text-right">
-                <h4><small><i> Data de criação:  {$base.created_at}</i></small></h4>
+                <h4><small><i> Data de criação:  {{$base->created_at}}</i></small></h4>
          </div>
-         {if $base.user_id eq $userId}
-         <a href="blog.php?micropost_id=$base.id" role="button" class="btn btn-warning">Update</a>
-         {/if}
+        @if ( $base->user_id === $userId)
+         <a href="blog.php?micropost_id=$base->id" role="button" class="btn btn-warning">Update</a>
+         @endif
    	</div>
 </div>
 
     <hr>
-    {/foreach}
+    @endforeach
 
     <!-- Right-aligned media object -->
 
