@@ -8,6 +8,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+
+        .carousel-inner img {
+            width: 50%; /* Set width to 100% */
+            margin: auto;
+            min-height:100px;
+        }
+
+        /* Hide the carousel text when the screen is less than 600 pixels wide */
+        @media (max-width: 200px) {
+            .carousel-caption {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -28,13 +54,9 @@
         </div>
     </div>
 </nav>
-    @if ($errors->any())
+    @if ($errors  -> any() )
     <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li><p style="text-align: center">{{$error}}</p></li>
-        @endforeach
-      </ul>
+        <p style="text-align: center">{{$errors}}</p>
     </div>
     @endif
     </div>

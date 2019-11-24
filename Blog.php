@@ -39,12 +39,11 @@ class Blog extends Controller
     }
    public function register_action(Request $request)
  {
-    
     $username  = $request->username;
     $email    = $request->email;
     $password   = $request->password;
     $password_confirmed= $request->passwordconfirmed;
-    $password_final= substr(md5($request->password),0,32);
+    $password_final= substr(md5($password),0,32);
 
     $nrows= Blog_model::check_email($email);
 
@@ -58,14 +57,12 @@ class Blog extends Controller
        return redirect('register')->withErrors('Todos os campos devem ser preenchidos');
     }
 
-    elseif ($nrows>0) {
+    elseif (count($nrows)>0) {
         return redirect('register')->withErrors('Email já existe na base de dados');
     }
     else{
-        $sql_insert = "INSERT INTO users(name, email, password_digest, created_at, updated_at) VALUES('$username','$email','$password_final',NOW(),NOW())";
-        if(!($result = @ mysql_query($sql_insert,$db)))
-            showerror(); 
-        return view('message_template');
+        $Message='Success: New user registered';
+        return view('/message_template', $Message);
         }
 
  }

@@ -11,10 +11,7 @@
 |
 */
 
-
 Route::get('/', 'Blog@index' ); 
 
 Route::get('/register', 'Blog@register' );
-
-Route::get('/register', 'Blog@register_action' );
-Route::post('/register','Register@register_action');
+Route::post('/register', 'Blog@register_action' );
