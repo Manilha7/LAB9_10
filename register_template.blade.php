@@ -54,13 +54,13 @@
         </div>
     </div>
 </nav>
-    @if ($MessageError > -1 )
+    @if ($errors  -> any() )
     <div class="alert alert-danger">
-        <p style="text-align: center">{{$MessageError}}</p>
+        <p style="text-align: center">{{$errors}}</p>
     </div>
     @endif
     </div>
-<form method="POST" action="register_action.php">
+<form method="POST" action="{{action('Blog@register_action')}}">
     <div class="container text-center">
         <div class="row content">
             <div class="col-sm-2 sidenav">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password-confirmed" type="password" class="form-control" name="password-confirmed" placeholder="Password-Confirmation" >
+                    <input id="password-confirmed" type="password" class="form-control" name="passwordconfirmed" placeholder="Password-Confirmation" >
                 </div>
                 <br>
                 <hr>
@@ -93,6 +93,7 @@
         </div>
 
     </div>
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 </form>
 </body>
 </html>

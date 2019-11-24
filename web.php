@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/blog', 'Blog@index' ); 
+Route::get('/', 'Blog@index' ); 
 
-Route::get('/blog/register', 'Blog@register' );
+Route::get('/register', 'Blog@register' );
+
+Route::get('/register', 'Blog@register_action' );
+Route::post('/register','Register@register_action');
