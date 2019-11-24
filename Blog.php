@@ -39,6 +39,7 @@ class Blog extends Controller
     }
    public function register_action(Request $request)
  {
+    
     $username  = $request->username;
     $email    = $request->email;
     $password   = $request->password;
