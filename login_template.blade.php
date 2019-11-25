@@ -81,6 +81,9 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="password-confirmed" type="password" class="form-control" name="password" placeholder="Password" required>
                 </div>
+                <div class="input-group">
+                    <label><input type="checkbox" name="rememberMe" value="true">Remember me</label>
+                </div>
             <br>
             <hr>
             <button style="float: bottom" type="submit" class="btn btn-warning">GO</button>

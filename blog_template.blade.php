@@ -45,24 +45,25 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="{{#href1}}">{{$MENU_1}}</a></li>
+                <li><a href="{{$href1}}">{{$MENU_1}}</a></li>
 
         </div>
     </div>
 </nav>
-<div>
+
 <div class="col-sm-2">
     </div>
 <div class="col-sm-8 ">
-  <div class="container-fluid well">
-     <form class="form-vertical" action="{{action('Blog@login_action')}}" method="POST">
-        <textarea rows="4" class="form-control" id="post" name="content" style="resize: vertical;">{{$post}}</textarea>
+    <div class="container-fluid well">
+        <form class="form-vertical" action="{{action('Blog@post_action',$blog_id)}}" method="POST">
+            <textarea rows="4" class="form-control" id="post" name="post" style="resize: vertical;" required>{{$post}}</textarea>
+            <br>
+            <button style="float: bottom" type="submit" class="btn btn-success">Go</button>
+            <a role="button" class="btn btn-danger" href="{{action('Blog@index')}}">Cancel</a>
+      
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </form>
-        <br>
-        <button style="float: bottom" type="submit" class="btn btn-success">Go</button>
-        <button style="float: bottom" type="reset" class="btn btn-danger">Cancel</button>
-  </div>
-</div>
+    </div>
 </div>
 
 </body>

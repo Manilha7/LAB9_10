@@ -5,7 +5,7 @@ class Blog_model
 {
  public static function get_posts()
  {
- 	$sql = DB::select("SELECT name,microposts.created_at,microposts.updated_at,microposts.user_id,content FROM users INNER JOIN microposts ON users.id = microposts.user_id ORDER BY microposts.updated_at DESC");
+ 	$sql = DB::select("SELECT name,microposts.created_at,microposts.updated_at,microposts.user_id,microposts.id,content FROM users INNER JOIN microposts ON users.id = microposts.user_id ORDER BY microposts.updated_at DESC");
     return $sql;
  }
   public static function register_user($username,$email,$password_final){
@@ -31,15 +31,22 @@ class Blog_model
     }
 
      public static function get_blog($blog_id, $user_id){
-        $getblog = DB::select("SELECT content FROM microposts WHERE user_id='$user' AND id='$micropost_id'");
+        $getblog = DB::select("SELECT content FROM microposts WHERE user_id ='$user_id' AND id='$blog_id'");
         return $getblog;
     }
     
     public static function update_blog($post,$blog_id, $user_id){
        
-        $udpateblog = DB::update("UPDATE microposts SET content='$post', updated_at=NOW() WHERE user_id='$user' AND id='$micropost_id'");
+        $udpateblog = DB::update("UPDATE microposts SET content='$post', updated_at=NOW() WHERE user_id='$user_id' AND id='$blog_id'");
         
         return $udpateblog;
+    }
+    public static function set_cookie($email,$value) {
+        DB::update("UPDATE users SET remember_digest = '$value' WHERE email='$email'");
+    }
+    public static function get_user_cookie($value){
+        $query = DB::select("SELECT * FROM users WHERE remember_digest='$value'");
+        return $query;        
     }
 }
  ?>

@@ -118,13 +118,14 @@
             <p> {{$base->content}}</p>
             <div class="text-right">
                 <h4><small><i> Data de criação:  {{$base->created_at}}</i></small></h4>
+            
+                @if ( $base->user_id === $userId)
+                <a href="{{action('Blog@post',$base->id)}}" role="button" class="btn btn-success">Update</a>
+                @endif
          </div>
-        @if ( $base->user_id === $userId)
-         <a href="blog.php?micropost_id=$base->id" role="button" class="btn btn-warning">Update</a>
-         @endif
    	</div>
 </div>
-
+    
     <hr>
     @endforeach
 
