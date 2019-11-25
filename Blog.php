@@ -9,7 +9,7 @@ class Blog extends Controller
  	$baseLab4 = Blog_model::get_posts();
  	$data= array(
  	'MENU_1' => "Home",
- 	'href1' => 'blog',
+ 	'href1' => '',
  	'MENU_2' => 'Login',
  	'href2' => 'login', 
  	'MENU_3' => 'Register',
@@ -17,7 +17,22 @@ class Blog extends Controller
  	'userId' => 'no',
  	'baseLab4' => $baseLab4);
 
-
+    if (session()->has('name')) {
+    $name=session()->get('name');
+    $id=session()->get('id');
+        $data2= array(
+    'MENU_1' => "Home",
+    'href1' => '',
+    'MENU_2' => 'Welcome '.$name,
+    'href2' => '', 
+    'MENU_3' => 'Logout',
+    'href3' => 'logout',
+    'MENU_4' => 'Post Blog',
+    'href4' => '',
+    'userId' => $id,
+    'baseLab4' => $baseLab4);
+    return view('index_template', $data2);
+    }   
     return view("index_template", $data);
  }
 
@@ -25,11 +40,11 @@ class Blog extends Controller
  {
  	$data= array(
  	'MENU_1' => "Home",
- 	'href1' => '/',
+ 	'href1' => '',
  	'MENU_2' => 'Login',
- 	'href2' => '/login', 
+ 	'href2' => 'login', 
  	'MENU_3' => 'Register',
- 	'href3' => '/register',
+ 	'href3' => 'register',
 	 'username' => '',
 	 'email' => '',
 	 'MessageError' => -1
@@ -37,8 +52,10 @@ class Blog extends Controller
 
     return view('register_template', $data);
     }
+
+
    public function register_action(Request $request)
- {
+{
     $username  = $request->username;
     $email    = $request->email;
     $password   = $request->password;
@@ -67,6 +84,58 @@ class Blog extends Controller
         return view('/message_template',$data);
         }
  }
+    public function login()
+    {
+        $data= array(
+    'MENU_1' => "Home",
+    'href1' => '',
+    'MENU_2' => 'Login',
+    'href2' => 'login', 
+    'MENU_3' => 'Register',
+    'href3' => 'register',
+     'username' => '',
+     'email' => '',
+     'MessageError' => -1
+    );
+
+    return view('login_template', $data);
+    }
+
+    public function login_action(Request $request)
+    {
+        $email    = $request->email;
+        $password   = $request->password;
+        $password_final= substr(md5($password),0,32);
+
+        $nrowslogin= Blog_model::validate_user($email,$password_final);
+
+        if (count($nrowslogin) >0) {
+            session(['id' => $nrowslogin[0]->id]);
+            session(['name' => $nrowslogin[0]->name]);
+            $data = array(
+        'Message' => "Welcome back!");
+        return view('/message_template',$data);
+        }
+        else
+            return redirect('login')->withErrors('Login failed');
+    } 
+
+    public function logout(){
+    session()->flush();
+    $baseLab4 = Blog_model::get_posts();
+    $data= array(
+    'MENU_1' => "Home",
+    'href1' => '',
+    'MENU_2' => 'Login',
+    'href2' => 'login', 
+    'MENU_3' => 'Register',
+    'href3' => 'register',
+    'userId' => 'no',
+    'baseLab4' => $baseLab4,
+    'Message' => 'See you back soon');
+
+    return view('message_template', $data);
+    }
 
 }
 ?>

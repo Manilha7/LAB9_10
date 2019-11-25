@@ -18,6 +18,10 @@ class Blog_model
         $queryemail= DB::select("SELECT * FROM users where email='$email'");
         return $queryemail;
     }
-    
+    public static function validate_user($email,$password_final){
+              
+        $queryvalidate = DB::select("SELECT * FROM users WHERE email='$email' AND password_digest='$password_final'");
+        return $queryvalidate;
+    }
 }
  ?>

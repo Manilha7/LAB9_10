@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +35,7 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -44,56 +44,52 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="{{$href1}}">{{$MENU_1}}</a></li>
+                <li><a href="index.php">{{$MENU_1}}</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{$href2}}">{{$MENU_2}}</a></li>
-                <li><a href="{{$href3}}">{{$MENU_3}}</a></li>
+                <li><a href="register.php">{{$MENU_2}}</a></li>
+                <li><a href="login.php">{{$MENU_3}}</a></li>
             </ul>
         </div>
     </div>
 </nav>
-    @if ($errors  -> any() )
+@if ($errors->any())
     <div class="alert alert-danger">
-        <p style="text-align: center">{{$errors}}</p>
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li><p style="text-align: center">{{$error}}</p></li>
+        @endforeach
+      </ul>
     </div>
     @endif
     </div>
-<form method="POST" action="{{action('Blog@register_action')}}">
-    <div class="container text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-            </div>
-            <div class="col-sm-8 text-center">
-                <h1>Register</h1>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="user" type="text" class="form-control" name="username" placeholder="Username" value="{{$username}}" >
-                </div>
+ 
+<form method="POST" action="{{action('Blog@login_action')}}">
+<div class="container text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-center">
+            <h1>Login</h1>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" value="{{$email}}">
+                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password"   >
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password-confirmed" type="password" class="form-control" name="passwordconfirmed" placeholder="Password-Confirmation" >
-                </div>
-                <br>
-                <hr>
-                <button style="float: bottom" type="submit" class="btn btn-success">Submit</button>
-                <button style="float: bottom" type="reset" class="btn btn-danger">Reset</button>
-            </div>
-            <div class="col-sm-2 sidenav">
-            </div>
-        </div>
 
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password-confirmed" type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+            <br>
+            <hr>
+            <button style="float: bottom" type="submit" class="btn btn-warning">GO</button>
+        </div>
+        <div class="col-sm-2 sidenav">
+        </div>
     </div>
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+</div>
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 </form>
 </body>
 </html>
