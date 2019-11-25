@@ -9,11 +9,11 @@ class Blog extends Controller
  	$baseLab4 = Blog_model::get_posts();
  	$data= array(
  	'MENU_1' => "Home",
- 	'href1' => '',
+ 	'href1' => '/~a58604/LAB9_10/blog',
  	'MENU_2' => 'Login',
- 	'href2' => 'login', 
+ 	'href2' => '/~a58604/LAB9_10/blog/login', 
  	'MENU_3' => 'Register',
- 	'href3' => 'register',
+ 	'href3' => '/~a58604/LAB9_10/blog/register',
  	'userId' => 'no',
  	'baseLab4' => $baseLab4);
 
@@ -22,11 +22,11 @@ class Blog extends Controller
     $id=session()->get('id');
         $data2= array(
     'MENU_1' => "Home",
-    'href1' => '',
+    'href1' => '/~a58604/LAB9_10/blog',
     'MENU_2' => 'Welcome '.$name,
     'href2' => '', 
     'MENU_3' => 'Logout',
-    'href3' => 'logout',
+    'href3' => '/~a58604/LAB9_10/blog/logout',
     'MENU_4' => 'Post Blog',
     'href4' => '',
     'userId' => $id,
@@ -40,11 +40,11 @@ class Blog extends Controller
  {
  	$data= array(
  	'MENU_1' => "Home",
- 	'href1' => '',
+ 	'href1' => '/~a58604/LAB9_10/blog',
  	'MENU_2' => 'Login',
- 	'href2' => 'login', 
+ 	'href2' => '/~a58604/LAB9_10/blog/login', 
  	'MENU_3' => 'Register',
- 	'href3' => 'register',
+ 	'href3' => '/~a58604/LAB9_10/blog/register',
 	 'username' => '',
 	 'email' => '',
 	 'MessageError' => -1
@@ -65,34 +65,34 @@ class Blog extends Controller
     $nrows= Blog_model::check_email($email);
 
     if ($password!=$password_confirmed && empty($username)!=true && empty($email)!=true) {
-        return redirect('register')->withErrors('Passwords não coincidem')->withInput();
+        return redirect('blog/register')->withErrors('Passwords não coincidem')->withInput();
     }
     elseif (empty($password) && empty($password_confirmed) && empty($username)!=true && empty($email)!=true) {
-        return redirect('register')->withErrors('Password em branco')->withInput();
+        return redirect('blog/register')->withErrors('Password em branco')->withInput();
     }
     elseif ( empty($password) || empty($password_confirmed) || empty($username) || empty($email)) {
-       return redirect('register')->withErrors('Todos os campos devem ser preenchidos')->withInput();
+       return redirect('blog/register')->withErrors('Todos os campos devem ser preenchidos')->withInput();
     }
 
     elseif (count($nrows)>0) {
-        return redirect('register')->withErrors('Email já existe na base de dados')->withInput($request->except('email'));
+        return redirect('blog/register')->withErrors('Email já existe na base de dados')->withInput($request->except('email'));
     }
     else{
         $register= Blog_model::register_user($username,$email,$password_final);
         $data = array(
         'Message' => "Success: New user registered");
-        return view('/message_template',$data);
+        return view('message_template',$data);
         }
  }
     public function login()
     {
         $data= array(
     'MENU_1' => "Home",
-    'href1' => '',
+    'href1' => '/~a58604/LAB9_10/blog',
     'MENU_2' => 'Login',
-    'href2' => 'login', 
+    'href2' => '/~a58604/LAB9_10/blog/login', 
     'MENU_3' => 'Register',
-    'href3' => 'register',
+    'href3' => '/~a58604/LAB9_10/blog/register',
      'username' => '',
      'email' => '',
      'MessageError' => -1
@@ -114,10 +114,10 @@ class Blog extends Controller
             session(['name' => $nrowslogin[0]->name]);
             $data = array(
         'Message' => "Welcome back!");
-        return view('/message_template',$data);
+        return view('message_template',$data);
         }
         else
-            return redirect('login')->withErrors('Login failed');
+            return redirect('blog/login')->withErrors('Login failed');
     } 
 
     public function logout(){
@@ -125,11 +125,11 @@ class Blog extends Controller
     $baseLab4 = Blog_model::get_posts();
     $data= array(
     'MENU_1' => "Home",
-    'href1' => '',
+    'href1' => '/~a58604/LAB9_10/blog',
     'MENU_2' => 'Login',
-    'href2' => 'login', 
+    'href2' => '/~a58604/LAB9_10/blog/login', 
     'MENU_3' => 'Register',
-    'href3' => 'register',
+    'href3' => '/~a58604/LAB9_10/blog/register',
     'userId' => 'no',
     'baseLab4' => $baseLab4,
     'Message' => 'See you back soon');

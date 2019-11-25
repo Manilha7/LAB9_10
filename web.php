@@ -10,12 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+ return view('welcome');
+}); 
 
-Route::get('/', 'Blog@index' ); 
 
-Route::get('/register', 'Blog@register' );
-Route::post('/register', 'Blog@register_action' );
 
-Route::get('/login', 'Blog@login' );
-Route::post('/login', 'Blog@login_action' );
-Route::get('/logout', 'Blog@logout' );
+Route::get('/blog', 'Blog@index' ); 
+
+Route::get('/blog/register', 'Blog@register' );
+Route::post('/blog/register_action', 'Blog@register_action' );
+Route::get('/blog/login', 'Blog@login' ); 
+Route::post('/blog/login_action', 'Blog@login_action' );
+Route::get('/blog/logout', 'Blog@logout' );
