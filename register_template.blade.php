@@ -28,19 +28,19 @@
         </div>
     </div>
 </nav>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li><p style="text-align: center">{{$error}}</p></li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
-    </div>
 <form method="POST" action="{{action('Blog@register_action')}}">
     <div class="container text-center">
         <div class="row content">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                <li><p style="text-align: center">{{$error}}</p></li>
+                @endforeach
+              </ul>
+            </div>
+            @endif
+            </div>
             <div class="col-sm-2 sidenav">
             </div>
             <div class="col-sm-8 text-center">
